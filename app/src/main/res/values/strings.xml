@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Caculator_Test</string>
-    <string name="clear">C</string>
+    <string name="clear">AC</string>
     <string name="number7">7</string>
 </resources>

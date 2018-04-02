@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="co_result">40sp</dimen>
+    <dimen name="co_result">60sp</dimen>
     <dimen name="aa">100dp</dimen>
 </resources>

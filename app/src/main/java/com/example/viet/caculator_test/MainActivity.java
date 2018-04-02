@@ -8,15 +8,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    private TextView tvNumber;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView tvResult;
 
-    private Button btnClear;
-    private Button btnRemove;
+    private Button btnClearAll;
+    private Button btnRemove1;
     private Button btnPer;
-    private Button btnDot;
     private Button btnEqual;
+    private Button btnDot;
 
     private Button btnDivi;
     private Button btnMulti;
@@ -35,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnNumber3;
     private Button btnNumber0;
 
+    private int tem;
+    private float t = Float.parseFloat(tvResult.getText().toString());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +46,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initWidget() {
-        tvNumber = findViewById(R.id.tv_number);
         tvResult = findViewById(R.id.tv_result);
 
-        btnClear = this.findViewById(R.id.btn_clear);
-        btnRemove = this.findViewById(R.id.btn_remove);
+        btnClearAll = this.findViewById(R.id.btn_clearAll);
+        btnRemove1 = this.findViewById(R.id.btn_remove1);
         btnPer = this.findViewById(R.id.btn_per);
         btnDot = this.findViewById(R.id.btn_dot);
         btnEqual = this.findViewById(R.id.btn_equal);
@@ -71,13 +71,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnNumber7 = findViewById(R.id.btn_number7);
         btnNumber8 = findViewById(R.id.btn_number8);
         btnNumber9 = findViewById(R.id.btn_number9);
-        }
-    public void setEventClickViews(){
-        tvNumber.setOnClickListener(this);
+    }
+
+    public void setEventClickViews() {
         tvResult.setOnClickListener(this);
 
-        btnClear.setOnClickListener(this);
-        btnRemove.setOnClickListener(this);
+        btnClearAll.setOnClickListener(this);
+        btnRemove1.setOnClickListener(this);
         btnPer.setOnClickListener(this);
         btnEqual.setOnClickListener(this);
         btnYinyang.setOnClickListener(this);
@@ -102,19 +102,185 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_number0:
-                tvNumber.getText();
+                setBtnNumber0();
+                break;
             case R.id.btn_number1:
+                setBtnNumber1();
+                break;
             case R.id.btn_number2:
+                setBtnNumber2();
+                break;
             case R.id.btn_number3:
+                setBtnNumber3();
+                break;
             case R.id.btn_number4:
+                setBtnNumber4();
+                break;
             case R.id.btn_number5:
+                setBtnNumber5();
+                break;
             case R.id.btn_number6:
+                setBtnNumber6();
+                break;
             case R.id.btn_number7:
+                setBtnNumber7();
+                break;
             case R.id.btn_number8:
+                setBtnNumber8();
+                break;
             case R.id.btn_number9:
+                setBtnNumber9();
+                break;
+
+
+            case R.id.btn_plus:
+
+                tvResult.append("+");
+                break;
+            case R.id.btn_multi:
+
+                tvResult.append("x");
+                break;
+            case R.id.btn_minus:
+
+                tvResult.append("-");
+                break;
+            case R.id.btn_divi:
+
+                tvResult.append("÷");
+                break;
+
+
+            case R.id.btn_remove1:
+                setBtnRemove1();
+                break;
+            case R.id.btn_clearAll:
+
+                tvResult.setText("0");
+                break;
+            case R.id.btn_dot:
+
+               setBtnDot();
+                break;
+            case R.id.btn_per:
+
+
+                break;
+            case R.id.btn_equal:
+                //kho day
+                setTvResult();
+                break;
+            case R.id.btn_yinyang:
+                setBtnYinyang();
+                break;
+        }
+
+    }
+    public void setBtnPer(){
+        if (t % (int) t ==0){
+            tvResult.setText(tvResult.getText().toString()+"%");
+        }
+
+    }
+    public void setBtnRemove1() {
+        char[] t = tvResult.getText().toString().toCharArray();
+        tvResult.setText(null);
+        if (t.length == 1) {
+            tvResult.setText("0");
+        } else
+            for (int i = 0; i < t.length - 1; i++) {
+                tvResult.setText(tvResult.getText() + String.valueOf(t[i]));
+            }
+    }
+
+    public void setBtnYinyang() {
+        if (!tvResult.getText().toString().equals("0")) {
+            t = t * (-1);
+            if (t % (int) t == 0) {
+                tvResult.setText(String.valueOf((int) t));
+            } else tvResult.setText(String.valueOf(t));
         }
     }
+    public void setBtnDot(){
+        if (t % (int) t ==0 ){
+            tvResult.setText(tvResult.getText().toString()+".");
+        }
+    }
+
+    public void setBtnNumber0() {
+        if (!tvResult.getText().toString().equals("0")) {
+            tvResult.setText(tvResult.getText().toString() + "0");
+        } else tvResult.setText("0");
+
+    }
+
+    public void setBtnNumber1() {
+        if (tvResult.getText().toString().equals("0")) {
+            tvResult.setText("1");
+        } else tvResult.setText(tvResult.getText().toString() + "1");
+
+    }
+
+    public void setBtnNumber2() {
+        if (tvResult.getText().toString().equals("0")) {
+            tvResult.setText("2");
+        } else tvResult.setText(tvResult.getText().toString() + "2");
+
+    }
+
+    public void setBtnNumber3() {
+        if (tvResult.getText().toString().equals("0")) {
+            tvResult.setText("3");
+        } else tvResult.setText(tvResult.getText().toString() + "3");
+
+    }
+
+    public void setBtnNumber4() {
+        if (tvResult.getText().toString().equals("0")) {
+            tvResult.setText("4");
+        } else tvResult.setText(tvResult.getText().toString() + "4");
+
+    }
+
+    public void setBtnNumber5() {
+        if (tvResult.getText().toString().equals("0")) {
+            tvResult.setText("5");
+        } else tvResult.setText(tvResult.getText().toString() + "5");
+
+    }
+
+    public void setBtnNumber6() {
+        if (tvResult.getText().toString().equals("0")) {
+            tvResult.setText("6");
+        } else tvResult.setText(tvResult.getText().toString() + "6");
+    }
+
+    public void setBtnNumber7() {
+        if (tvResult.getText().toString().equals("0")) {
+            tvResult.setText("7");
+        } else tvResult.setText(tvResult.getText().toString() + "7");
+
+    }
+
+    public void setBtnNumber8() {
+        if (tvResult.getText().toString().equals("0")) {
+            tvResult.setText("8");
+        } else tvResult.setText(tvResult.getText().toString() + "8");
+
+    }
+
+    public void setBtnNumber9() {
+        if (tvResult.getText().toString().equals("0")) {
+            tvResult.setText("9");
+        } else tvResult.setText(tvResult.getText().toString() + "9");
+
+    }
+
+    public void setTvResult() {
+
+    }
+
 }
 
