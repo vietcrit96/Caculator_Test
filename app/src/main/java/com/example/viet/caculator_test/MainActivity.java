@@ -35,7 +35,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnNumber0;
 
     private int tem;
-    private float t = Float.parseFloat(tvResult.getText().toString());
+    private float t;
+    private float kq;
+    boolean checkNew = true;
+    private float thamsothu1,thamsothu2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,18 +51,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initWidget() {
         tvResult = findViewById(R.id.tv_result);
 
-        btnClearAll = this.findViewById(R.id.btn_clearAll);
-        btnRemove1 = this.findViewById(R.id.btn_remove1);
-        btnPer = this.findViewById(R.id.btn_per);
-        btnDot = this.findViewById(R.id.btn_dot);
-        btnEqual = this.findViewById(R.id.btn_equal);
-        btnYinyang = this.findViewById(R.id.btn_yinyang);
+        btnClearAll = findViewById(R.id.btn_clearAll);
+        btnRemove1 = findViewById(R.id.btn_remove1);
+        btnPer = findViewById(R.id.btn_per);
+        btnDot = findViewById(R.id.btn_dot);
+        btnEqual = findViewById(R.id.btn_equal);
+        btnYinyang = findViewById(R.id.btn_yinyang);
 
 
-        btnPlus = this.findViewById(R.id.btn_plus);
-        btnMinus = this.findViewById(R.id.btn_minus);
-        btnMulti = this.findViewById(R.id.btn_multi);
-        btnDivi = this.findViewById(R.id.btn_divi);
+        btnPlus = findViewById(R.id.btn_plus);
+        btnMinus = findViewById(R.id.btn_minus);
+        btnMulti = findViewById(R.id.btn_multi);
+        btnDivi = findViewById(R.id.btn_divi);
 
         btnNumber0 = findViewById(R.id.btn_number0);
         btnNumber1 = findViewById(R.id.btn_number1);
@@ -81,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnPer.setOnClickListener(this);
         btnEqual.setOnClickListener(this);
         btnYinyang.setOnClickListener(this);
+        btnDot.setOnClickListener(this);
 
         btnPlus.setOnClickListener(this);
         btnMinus.setOnClickListener(this);
@@ -136,20 +140,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
             case R.id.btn_plus:
-
-                tvResult.append("+");
+                tem = 1;
+                t = Float.parseFloat(tvResult.getText().toString());
+                tvResult.setText("0");
                 break;
             case R.id.btn_multi:
-
-                tvResult.append("x");
+                tem = 2;
+                t = Float.parseFloat(tvResult.getText().toString());
+                tvResult.setText("0");
                 break;
             case R.id.btn_minus:
-
-                tvResult.append("-");
+                tem = 3;
+                t = Float.parseFloat(tvResult.getText().toString());
+                tvResult.setText("0");
                 break;
             case R.id.btn_divi:
-
-                tvResult.append("÷");
+                tem = 4;
+                t = Float.parseFloat(tvResult.getText().toString());
+                tvResult.setText("0");
                 break;
 
 
@@ -157,16 +165,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setBtnRemove1();
                 break;
             case R.id.btn_clearAll:
-
                 tvResult.setText("0");
                 break;
             case R.id.btn_dot:
-
-               setBtnDot();
+                setBtnDot();
                 break;
             case R.id.btn_per:
-
-
+//                setBtnPer();
                 break;
             case R.id.btn_equal:
                 //kho day
@@ -178,12 +183,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
     }
-    public void setBtnPer(){
-        if (t % (int) t ==0){
-            tvResult.setText(tvResult.getText().toString()+"%");
-        }
 
-    }
+//    public void setBtnPer() {
+//        tvResult.setText(tvResult.getText().toString() + "%");
+//        float t = Float.parseFloat(tvResult.getText().toString());
+//        float thamsothu1 =t/100;
+////        t=t/100;
+////        if (t % (int) t == 0) {
+////        }
+//// tvResult.setText(tvResult.getText().toString() + "%");
+//    }
+
     public void setBtnRemove1() {
         char[] t = tvResult.getText().toString().toCharArray();
         tvResult.setText(null);
@@ -197,19 +207,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void setBtnYinyang() {
         if (!tvResult.getText().toString().equals("0")) {
-            t = t * (-1);
+            float t = Float.parseFloat(tvResult.getText().toString()) * (-1);
             if (t % (int) t == 0) {
                 tvResult.setText(String.valueOf((int) t));
             } else tvResult.setText(String.valueOf(t));
         }
     }
-    public void setBtnDot(){
-        if (t % (int) t ==0 ){
-            tvResult.setText(tvResult.getText().toString()+".");
+
+    public void setBtnDot() {
+        float t = Float.parseFloat(tvResult.getText().toString());
+        if (t == 0) {
+            tvResult.setText(tvResult.getText().toString() + ".");
+        } else if (t % (int) t == 0) {
+            tvResult.setText(tvResult.getText().toString() + ".");
         }
     }
 
     public void setBtnNumber0() {
+        checkNew();
+        checkNew = false;
         if (!tvResult.getText().toString().equals("0")) {
             tvResult.setText(tvResult.getText().toString() + "0");
         } else tvResult.setText("0");
@@ -217,6 +233,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void setBtnNumber1() {
+        checkNew();
+        checkNew = false;
         if (tvResult.getText().toString().equals("0")) {
             tvResult.setText("1");
         } else tvResult.setText(tvResult.getText().toString() + "1");
@@ -224,6 +242,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void setBtnNumber2() {
+        checkNew();
+        checkNew = false;
         if (tvResult.getText().toString().equals("0")) {
             tvResult.setText("2");
         } else tvResult.setText(tvResult.getText().toString() + "2");
@@ -231,6 +251,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void setBtnNumber3() {
+        checkNew();
+        checkNew = false;
         if (tvResult.getText().toString().equals("0")) {
             tvResult.setText("3");
         } else tvResult.setText(tvResult.getText().toString() + "3");
@@ -238,6 +260,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void setBtnNumber4() {
+        checkNew();
+        checkNew = false;
         if (tvResult.getText().toString().equals("0")) {
             tvResult.setText("4");
         } else tvResult.setText(tvResult.getText().toString() + "4");
@@ -245,6 +269,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void setBtnNumber5() {
+        checkNew();
+        checkNew = false;
         if (tvResult.getText().toString().equals("0")) {
             tvResult.setText("5");
         } else tvResult.setText(tvResult.getText().toString() + "5");
@@ -252,12 +278,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void setBtnNumber6() {
+        checkNew();
+        checkNew = false;
         if (tvResult.getText().toString().equals("0")) {
             tvResult.setText("6");
         } else tvResult.setText(tvResult.getText().toString() + "6");
     }
 
     public void setBtnNumber7() {
+        checkNew();
+        checkNew = false;
         if (tvResult.getText().toString().equals("0")) {
             tvResult.setText("7");
         } else tvResult.setText(tvResult.getText().toString() + "7");
@@ -265,6 +295,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void setBtnNumber8() {
+        checkNew();
+        checkNew = false;
         if (tvResult.getText().toString().equals("0")) {
             tvResult.setText("8");
         } else tvResult.setText(tvResult.getText().toString() + "8");
@@ -272,6 +304,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void setBtnNumber9() {
+        checkNew();
+        checkNew = false;
         if (tvResult.getText().toString().equals("0")) {
             tvResult.setText("9");
         } else tvResult.setText(tvResult.getText().toString() + "9");
@@ -279,8 +313,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void setTvResult() {
+        if (tem == 1) {
+            kq = t + Float.parseFloat(tvResult.getText().toString());
+            if (kq % (int) kq == 0) {
+                tvResult.setText(String.valueOf((int) kq));
+            } else tvResult.setText(String.valueOf(kq));
+            t = kq;
+        }
+        if (tem == 2) {
+            kq = t * Float.parseFloat(tvResult.getText().toString());
+            if (kq % (int) kq == 0) {
+                tvResult.setText(String.valueOf((int) kq));
+            } else tvResult.setText(String.valueOf(kq));
+            t = kq;
+        }
+        if (tem == 3) {
+            kq = t - Float.parseFloat(tvResult.getText().toString());
+            if (kq % (int) kq == 0) {
+                tvResult.setText(String.valueOf((int) kq));
+            } else tvResult.setText(String.valueOf(kq));
+            t = kq;
+        }
+        if (tem == 4) {
+            kq = t / Float.parseFloat(tvResult.getText().toString());
+            if (kq % (int) kq == 0) {
+                tvResult.setText(String.valueOf((int) kq));
+            } else tvResult.setText(String.valueOf(kq));
+            t = kq;
+        }
+        checkNew = true;
 
     }
 
+    public void checkNew() {
+        if (checkNew) {
+            tvResult.setText(null);
+        }
+    }
 }
 
